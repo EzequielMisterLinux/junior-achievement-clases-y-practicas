@@ -1,0 +1,16 @@
+.container-card-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 20px;
+}
+
+.card-productos{
+    background: linear-gradient(rgb(161, 204, 247) ,rgb(71, 158, 245));
+    border-radius: 15px;
+    
+}
+
+.card-productos img {
+    height: 200px;
+}

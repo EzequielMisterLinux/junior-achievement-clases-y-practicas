@@ -1,0 +1,24 @@
+.form-login-not-visible {
+    display: none;
+}
+
+.formContainer {
+    display: block;
+    position: fixed;
+    top: 150px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.containerformJustify {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.containerElementForm {
+    background-color: bisque;
+    display: grid;
+    padding: 20px;
+    width: 200px;
+}

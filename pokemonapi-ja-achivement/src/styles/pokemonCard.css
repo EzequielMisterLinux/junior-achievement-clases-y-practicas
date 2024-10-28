@@ -1,0 +1,37 @@
+body {
+    background-image: url("https://external-preview.redd.it/BQn_a9DfzKmu7-j58POI-Vqyj8uO2fzeG1AlfMBAjRs.png?width=640&crop=smart&auto=webp&s=658e889e63e257651695547fa04e9cc15dd21c4d");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedorPokemon{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    
+}
+
+.contenedorPokemon section {
+    background-image: url("https://s3.amazonaws.com/gameartpartnersimagehost/wp-content/uploads/2019/12/16.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    border-radius: 20px;
+    
+}
+
+.contenedorPokemon p {
+    font-size: 24px;
+    color: yellow;
+    font-family: 'Pokemon Solid', sans-serif;
+                                                
+}
+
+.contenedorPokemon img {
+    height: 200px;
+}
