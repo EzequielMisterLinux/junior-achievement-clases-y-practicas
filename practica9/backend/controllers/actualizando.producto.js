@@ -12,11 +12,6 @@ const ActualizarProducto = async (req, res) => {
         disponibilidad
     } = req.body
 
-    if (!nombre || !descripcion || !precio || !disponibilidad) {
-        return res.status(400).json({
-            msj : "todos los campos del producto son requiridos"
-        })
-    }
 
     try {
         
