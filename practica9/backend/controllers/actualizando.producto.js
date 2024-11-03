@@ -1,8 +1,10 @@
 import ProductModel from "../models/productos.model.js";
 
-
-const AgregarProducto = async (req, res) => {
+const ActualizarProducto = async (req, res) => {
     
+    const {id} = req.params
+
+        
     const {
         nombre,
         descripcion,
@@ -16,25 +18,27 @@ const AgregarProducto = async (req, res) => {
         })
     }
 
-
     try {
         
-        let guardandoInformacion = await ProductModel({
+
+        const actualizandoProducto = await ProductModel.findByIdAndUpdate(id,{
             nombre,
             descripcion,
             precio,
             disponibilidad
+        }, {new:true} )
+
+        res.status(200).json({
+            msj : "producto actualizado exitosamente", actualizandoProducto
         })
-
-        guardandoInformacion.save()
-
-        res.status(201).json({msj:"producto creado exitosamente", guardandoInformacion})
 
 
     } catch (error) {
-        console.error(error);
-        
+        res.status(500).json({
+            msj: "hubo un problema al actualizar el producto"
+        })
     }
+
 }
 
-export default AgregarProducto
+export default ActualizarProducto
