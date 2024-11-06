@@ -63,6 +63,8 @@ rutasDeLosProductos.get("/obtener-productos", ObteniendoTodosLosProductos);
  *     responses:
  *       200:
  *         description: Producto eliminado exitosamente
+ *       400:
+ *          description: El id para borrar el producto es requerido
  *       500:
  *         description: Error al borrar el producto
  */

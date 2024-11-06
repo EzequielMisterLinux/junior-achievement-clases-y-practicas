@@ -8,7 +8,7 @@ let contenedorDeProductos = document.createElement("div")
 
 const getProductos = async () => {
     let fetchProducto = await fetchProductos()
-    console.log(fetchProducto);
+    
 
     let {obteniendoProductos} = await fetchProducto
 
@@ -17,10 +17,19 @@ const getProductos = async () => {
 
     obteniendoProductos.forEach(item => {
         
-            console.log(item.nombre);
-            console.log(item.descripcion);
-            console.log(item.precio);
-            console.log(item.disponibilidad);
+
+
+            const disponibilidadtransform = () => {
+                if (item.disponibilidad == true) {
+                    return "si esta disponible";
+                }else if (item.disponibilidad == false) {
+                    return "no esta disponible";
+    
+                }
+            }
+
+            let valorDisponibilidad = disponibilidadtransform()
+
 
     let app = document.getElementById("app")
     let contenedorDeProductos = document.createElement("div")
@@ -29,7 +38,7 @@ const getProductos = async () => {
     <p>${item.nombre}</p>
     <p>${item.descripcion}</p>
     <p>${item.precio}</p>
-    <p>${item.disponibilidad}</p>
+    <p>${valorDisponibilidad}</p>
     `
 
     app.appendChild(contenedorDeProductos)
