@@ -5,6 +5,12 @@ const BorrandoProducto = async (req, res) => {
     
     const {id} = req.params
 
+    if (!id) {
+        res.status(400).json({
+            msj: "El id para borrar el producto es requirido"
+        })
+    }
+
     try {
 
         const borrarProducto = await ProductModel.findByIdAndDelete(id)
