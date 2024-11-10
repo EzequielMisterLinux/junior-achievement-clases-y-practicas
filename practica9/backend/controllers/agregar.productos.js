@@ -10,7 +10,16 @@ const AgregarProducto = async (req, res) => {
         disponibilidad
     } = req.body
 
-    if (!nombre || !descripcion || !precio || !disponibilidad) {
+
+
+    const data = {
+        nombre: String(nombre),
+        descripcion : String(descripcion),
+        precio : Number(precio),
+        disponibilidad : Boolean(disponibilidad)
+    }
+
+    if (!data.nombre || !data.descripcion || !data.precio || !data.disponibilidad === undefined) {
         return res.status(400).json({
             msj : "todos los campos del producto son requiridos"
         })
@@ -19,12 +28,7 @@ const AgregarProducto = async (req, res) => {
 
     try {
         
-        let guardandoInformacion = await ProductModel({
-            nombre,
-            descripcion,
-            precio,
-            disponibilidad
-        })
+        let guardandoInformacion = await ProductModel(data)
 
         guardandoInformacion.save()
 

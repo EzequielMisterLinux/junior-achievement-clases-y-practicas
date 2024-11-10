@@ -1,25 +1,19 @@
 import AgregarProductos from "../services/addProductsApi";
-
 const FormularioParaCrearProducto = () => {
-
     try {
-        
         let agregarProducto = document.getElementById("form-add")
-
         agregarProducto.innerHTML = `
         <input type="text"id="nombre">
         <input type="text" id="descripcion">
         <input type="number" id="precio">
         <select id="opcions">
-        <option value="true" id="siesverdadero">Si esta disponible</option>
-        <option value="false" id="siesfalso">No esta disponible</option>
+        <option value="true" >Si esta disponible</option>
+        <option value="false" >No esta disponible</option>
         </select>
 
        <button id="btnagregar">agregar producto</button> 
 
         `
-
-
         
         let btnagregar = document.getElementById("btnagregar")
 
@@ -30,72 +24,32 @@ const FormularioParaCrearProducto = () => {
         let precio = document.getElementById("precio")
         let options = document.getElementById("opcions")
 
-        
-
-
 
         let transform = parseFloat(precio.value)
 
-        const transformToBoolean = () => {
-            if (options.value = "true") {
-                const siesverdadero = "true"
-                const myBooleano = new Boolean(siesverdadero);
-                console.log(myBooleano);
-                
-                return myBooleano
-                }else if (options.value = "false") {
-                    const sinoesVerdadero = "false"
-                    const myBooleanoFalse = new Boolean(sinoesVerdadero);
-                    console.log(myBooleanoFalse);
-                    
-                    return myBooleanoFalse
-                }
+    
+        const transformandoABooleano = () => {
+            console.log(options.value);
+            
+            return options.value === "true"
         }
 
-        let transformDataBoolean = transformToBoolean()
-        
-
-
+        let booleandata = transformandoABooleano()
 
         const data = {
             "nombre":nombre.value,
             "descripcion": descripcion.value,
             "precio": transform,
-            "disponibilidad": transformDataBoolean
+            "disponibilidad": Boolean(booleandata)
         }
             let response = await AgregarProductos(data)
             console.log(await response);
-            
-
-            
+                
         })
         
-        
-        
-        
-
     } catch (error) {
-        console.error(error);
-        
+        console.error(error);   
     }
-
 }
-
-
-
-
 FormularioParaCrearProducto()
 
-let options = document.getElementById("opcions") 
-const myBooleano = new Boolean(options.value);
-console.log(myBooleano);
-
-console.log(options.value);
-
-let siesVerdadero = document.getElementById("siesverdadero");
-
-let sinoesVerdadero = document.getElementById("siesfalso")
-
-console.log(siesVerdadero.value);
-
-console.log(sinoesVerdadero.value);

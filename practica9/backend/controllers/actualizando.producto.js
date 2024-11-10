@@ -12,16 +12,24 @@ const ActualizarProducto = async (req, res) => {
         disponibilidad
     } = req.body
 
+    const data = {
+        nombre: String(nombre),
+        descripcion : String(descripcion),
+        precio : Number(precio),
+        disponibilidad : Boolean(disponibilidad)
+    }
+
+    if (!data.nombre || !data.descripcion || !data.precio || !data.disponibilidad === undefined) {
+        return res.status(400).json({
+            msj : "todos los campos del producto son requiridos"
+        })
+    }
+
 
     try {
         
 
-        const actualizandoProducto = await ProductModel.findByIdAndUpdate(id,{
-            nombre,
-            descripcion,
-            precio,
-            disponibilidad
-        }, {new:true} )
+        const actualizandoProducto = await ProductModel.findByIdAndUpdate(id,data, {new:true} )
 
         res.status(200).json({
             msj : "producto actualizado exitosamente", actualizandoProducto
