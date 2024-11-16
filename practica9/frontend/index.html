@@ -4,13 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/styles/global.css">
+    
     <title>Vite App</title>
   </head>
   <body>
 
-    <div id="app"></div>
+
+    
+    <!-- You can open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_3.showModal()">open modal</button>
+<dialog id="my_modal_3" class="modal">
+  <div class="modal-box p-5 bg-slate-700 border">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 bg-red-400 border-spacing-3">✕</button>
+    </form>
+    
+    <p class="py-4 text-cyan-50">Press ESC key or click on ✕ button to close</p>
     <div id="form-add"></div>
+  </div>
+</dialog>
+
+    <div id="app"></div>
+    
     
     <script type="module" src="/main.js"></script>
     <script type="module" src="./src/elements/addProductoRender.js"></script>
