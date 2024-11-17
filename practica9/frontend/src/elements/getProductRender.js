@@ -1,6 +1,8 @@
 import deleteProductByID from "../services/deleteProductApi"
 import fetchProductos from "../services/fetchProductsApi"
 import Swal from "sweetalert2";
+import { Howl } from "howler";
+import confetti from "canvas-confetti";
 
 const getProductos = async () => {
     let fetchProducto = await fetchProductos()
@@ -25,13 +27,13 @@ const getProductos = async () => {
                 <th scope="col" class="px-6 py-3">
                     nombre
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 hidden md:table-cell">
                     descripcion
                 </th>
                 <th scope="col" class="px-6 py-3">
                     precio
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 hidden lg:table-cell">
                     disponibilidad
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -77,13 +79,13 @@ const getProductos = async () => {
     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <p>${item.nombre}</p>
             </th>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 hidden md:table-cell">
                 <p>${item.descripcion}</p>
             </td>
             <td class="px-6 py-4">
                 <p>${item.precio}</p>
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 hidden lg:table-cell">
                 <p>${valorDisponibilidad}</p>
             </td>
             <td class="px-6 py-4">
@@ -126,7 +128,38 @@ const getProductos = async () => {
     
     deleteProducto.addEventListener("click", async() => {
        
+        let soundWarning = new Howl({
+            src: ["../../warning.mp3"],
+            volume: 0.5,
+          });
 
+          let soundSuccess = new Howl({
+            src: ["../../success.mp3"],
+            volume: 0.5,
+          });
+  
+          const lanzarConfetti = () => {
+            confetti({
+              particleCount: 100,
+              startVelocity: 30,
+              spread: 360,
+              origin: {
+                x: Math.random(),
+                // since they fall down, start a bit higher than random
+                y: Math.random() - 0.2
+              }
+            });
+          }
+
+          const initSound = () => {
+            soundWarning.play();
+          }
+
+          const initSoundSucess = () =>{
+            soundSuccess.play()
+          }
+
+          initSound()
 
         Swal.fire({
             title: "Esta seguro de eliminarlo?",
@@ -146,6 +179,8 @@ const getProductos = async () => {
               const response = await deleteProductByID(deleteProducto.value)
               console.log(await response);
               getProductos()
+              initSoundSucess()
+              lanzarConfetti()
             }
           });
     })

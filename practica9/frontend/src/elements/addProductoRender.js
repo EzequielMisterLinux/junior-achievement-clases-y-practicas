@@ -1,10 +1,16 @@
 import AgregarProductos from "../services/addProductsApi";
 import getProductos from "./getProductRender";
 import Swal from "sweetalert2"
+import {Howl} from "howler";
+import confetti from "canvas-confetti"
 
 const FormularioParaCrearProducto = () => {
     try {
         let agregarProducto = document.getElementById("form-add")
+
+
+        
+        
 
         agregarProducto.className = "p-8 "
 
@@ -56,15 +62,35 @@ const FormularioParaCrearProducto = () => {
         let btnagregar = document.getElementById("btnagregar")
 
         btnagregar.addEventListener('click', async() => {
+          let sound = new Howl({
+            src: ["../../success.mp3"],
+            volume: 0.5,
+          });
+  
+          const lanzarConfetti = () => {
+            confetti({
+              particleCount: 100,
+              startVelocity: 30,
+              spread: 360,
+              origin: {
+                x: Math.random(),
+                // since they fall down, start a bit higher than random
+                y: Math.random() - 0.2
+              }
+            });
+          }
+
+          const initSound = () => {
+            sound.play();
+          }
+  
 
         let nombre = document.getElementById("nombre")
         let descripcion = document.getElementById("descripcion")
         let precio = document.getElementById("precio")
         let options = document.getElementById("opcions")
 
-        nombre.textContent === ""
-        descripcion.textContent === ""
-        precio.textContent === 0
+
 
         let transform = parseFloat(precio.value)
 
@@ -92,11 +118,23 @@ const FormularioParaCrearProducto = () => {
                 text: "producto creado exitosamente!",
                 icon: "success"
               });
+
+              lanzarConfetti()
+              initSound()
+              clearInputs()
               
            
 
 
         })
+        
+
+        const clearInputs = () => {
+          document.getElementById("nombre").value = ""
+          document.getElementById("descripcion").value = ""
+          document.getElementById("precio").value = ""
+          document.getElementById("opcions").value = ""
+        }
 
         
         
