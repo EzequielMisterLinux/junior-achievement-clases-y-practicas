@@ -125,14 +125,29 @@ const getProductos = async () => {
     let deleteProducto = document.getElementById(`delete-${item._id}`)
     
     deleteProducto.addEventListener("click", async() => {
-        const response = await deleteProductByID(deleteProducto.value)
-        console.log(await response);
-        getProductos()
+       
+
+
         Swal.fire({
-          title: "Producto Eliminado",
-          text: "producto eliminado!",
-          icon: "success"
-        });
+            title: "Esta seguro de eliminarlo?",
+            text: "Esta acción es inreversible!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, borrarlo!"
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "eliminado!",
+                text: "borrastes el producto exitosamente.",
+                icon: "success"
+              });
+              const response = await deleteProductByID(deleteProducto.value)
+              console.log(await response);
+              getProductos()
+            }
+          });
     })
     
 

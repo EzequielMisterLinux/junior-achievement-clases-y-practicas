@@ -6,7 +6,7 @@ const FormularioParaCrearProducto = () => {
     try {
         let agregarProducto = document.getElementById("form-add")
 
-        agregarProducto.className = "p-8 bg-gray-800"
+        agregarProducto.className = "p-8 "
 
         agregarProducto.innerHTML = `
 
@@ -85,7 +85,8 @@ const FormularioParaCrearProducto = () => {
         }
             let response = await AgregarProductos(data)
             console.log(await response);
-            getProductos()
+            await getProductos()
+            await getProductos()
             Swal.fire({
                 title: "Producto creado",
                 text: "producto creado exitosamente!",
