@@ -214,80 +214,43 @@ const modal = new Modal($targetEl, options, instanceOptions);
       modal.show();
 
 
-      
-      
-      
-    })
 
-    let updateById = document.getElementById("Updatebtn")
+      let updateById = document.getElementById("Updatebtn")
 
-    updateById.addEventListener("click", async() => {
-
-      let nombre = document.getElementById("nombreUpdate").value
-      let descripcion = document.getElementById("descripcionUpdate").value
-      let precio = document.getElementById("precioUpdate").value
-      let opctions = document.getElementById("opcionsUpdate").value
-
-      const newData = {
-        nombre: nombre,
-        descripcion : descripcion,
-        precio: precio,
-        disponibilidad : opctions
-      }
-
-
-      
-     
-
-
-      try {
-
-        if (await updateProductById(item._id, newData)) {
-          await getProductos()
-          await getProductos()
-
-          let soundSuccess = new Howl({
-            src: ["../../success.mp3"],
-            volume: 0.5,
-          });
-    
-          const lanzarConfetti = () => {
-            confetti({
-              particleCount: 100,
-              startVelocity: 30,
-              spread: 360,
-              origin: {
-                x: Math.random(),
-                // since they fall down, start a bit higher than random
-                y: Math.random() - 0.2
-              }
-            });
-          }
-          const initSoundSucess = () =>{
-            soundSuccess.play()
-          }
-    
-          
-    
-          modal.hide()
-          Swal.fire({
-            title: "producto actualizado!",
-            text: "El producto se actualizo exitosamente!",
-            icon: "success"
-          });
-
-          lanzarConfetti()
-          initSoundSucess()
-          
+      updateById.addEventListener("click", async() => {
+  
+        let nombre = document.getElementById("nombreUpdate").value
+        let descripcion = document.getElementById("descripcionUpdate").value
+        let precio = document.getElementById("precioUpdate").value
+        let opctions = document.getElementById("opcionsUpdate").value
+  
+        const newData = {
+          nombre: nombre,
+          descripcion : descripcion,
+          precio: precio,
+          disponibilidad : opctions
         }
+  
+        await updateProductById(item._id, newData)
+        await getProductos()
+        await getProductos()
+  
         
-      } catch (error) {
-        console.error(error);
-        
-      }
-
-
+        modal.hide()
+        Swal.fire({
+          title: "producto actualizado!",
+          text: "El producto se actualizo exitosamente!",
+          icon: "success"
+        });
+  
+  
+      })
+      
+      
+      
     })
+
+
 
 
 
