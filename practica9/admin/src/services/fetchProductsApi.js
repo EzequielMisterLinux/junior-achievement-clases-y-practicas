@@ -7,7 +7,9 @@ const fetchProductos = async () => {
     
     try {
         
-        const response = await axios.get(urlBase)
+        const response = await axios.get(urlBase, {
+            withCredentials: true,
+          })
 
         console.log(await response.data);
         

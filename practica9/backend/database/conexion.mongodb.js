@@ -5,11 +5,12 @@ configDotenv()
 
 let URLDB = process.env.MONGO
 
+
 const MongoConexion = async () => {
     
     try {
         
-        mongoose.connect(URLDB)
+        await mongoose.connect(URLDB)
         console.log("conexion exitosa a la base de datos");
         
 
