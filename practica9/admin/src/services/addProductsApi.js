@@ -1,4 +1,4 @@
-let urlBase = "http://localhost:3000/api/crear-producto";
+let urlBase = `${import.meta.env.VITE_API_URL}/crear-producto`;
 
 const AgregarProductos = async (formData) => {
     try {

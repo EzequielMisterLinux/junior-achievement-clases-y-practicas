@@ -1,18 +1,17 @@
 import FormularioParaCrearUsuario from "./src/elements/addNewUserRender";
 import FormularioParaCrearProducto from "./src/elements/addProductoRender";
-import initializeProductos from "./src/elements/getProductRender";
+import {initializeProductos} from "./src/elements/getProductRender";
 import RenderUsers from "./src/elements/RenderUsers";
 
 import authService from "./src/services/loginApi";
 import "./style.css";
 import "flowbite";
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     const loginAccess = document.getElementById("login");
     if (!loginAccess) return;
 
-    // Render login form
+
     loginAccess.innerHTML = `
         <div class="max-w-sm mx-auto">
             <div class="mb-5">
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Initialize app based on authentication status
+
     const initializeApp = async () => {
         const isLoggedUser = sessionStorage.getItem("token");
         
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Handle login button click
+
     const loginBtn = document.getElementById("loginbtn");
     if (loginBtn) {
         loginBtn.addEventListener("click", async (e) => {
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 RenderUsers()
                 loginAccess.textContent = "";
                 
-                // Use history API instead of reload to maintain state
+
                 window.history.pushState({}, '', '/dashboard');
                 window.dispatchEvent(new Event('popstate'));
                 window.location.reload();
@@ -80,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Handle logout
+
     const logout = document.getElementById("logout");
     if (logout) {
         logout.addEventListener("click", async () => {
@@ -88,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.clear();
                 sessionStorage.clear();
                 await authService.logout();
+
                 
-                // Use history API instead of reload
                 window.history.pushState({}, '', '/login');
                 window.dispatchEvent(new Event('popstate'));
                 window.location.reload();
@@ -99,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize app on load
+
     initializeApp().catch(console.error);
 });
 

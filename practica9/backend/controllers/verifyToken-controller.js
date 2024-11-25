@@ -20,6 +20,7 @@ const verifyToken = async (req, res) => {
       id: user._id,
       nombre: user.nombre,
       apellido: user.apellido,
+      edad: user.edad,
       email: user.email,
       image: user.image,
     });

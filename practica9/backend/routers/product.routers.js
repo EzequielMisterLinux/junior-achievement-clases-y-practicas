@@ -10,6 +10,7 @@ import verifyToken from "../controllers/verifyToken-controller.js";
 import Protected from "../middleware/protected.js";
 import logoutUser from "../controllers/logout.js";
 import getAllUsers from "../controllers/getAllUsers.controller.js";
+import UpdateUser from "../controllers/UpdateUser.controller.js";
 
 const rutasDeLosProductos = express.Router();
 
@@ -18,6 +19,7 @@ rutasDeLosProductos.post("/crear-usuario", Protected, CreateUser)
 
 rutasDeLosProductos.get("/get-users", Protected ,getAllUsers)
 
+rutasDeLosProductos.put("/users-update/:id", UpdateUser)
 
 rutasDeLosProductos.post("/login", LoginUser)
 

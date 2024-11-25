@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const urlBase = "http://localhost:3000/api/actualizar-productos";
+const urlBase = `${import.meta.env.VITE_API_URL}/actualizar-productos`;
 
 const updateProductById = async (id, formData) => {
     try {

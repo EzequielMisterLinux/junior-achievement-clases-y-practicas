@@ -34,7 +34,7 @@ const RenderUsers = () => {
           <tr>
             <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">
               <img
-                src="http://localhost:3000/uploads/${user.image}"
+                src="${import.meta.env.VITE_API_IMG}/${user.image}"
                 alt="${user.nombre}"
                 class="rounded-full h-16 w-16 object-cover"
               />

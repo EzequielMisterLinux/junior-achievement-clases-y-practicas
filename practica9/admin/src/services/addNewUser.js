@@ -1,4 +1,4 @@
-let urlBase = "http://localhost:3000/api/crear-usuario";
+let urlBase = `${import.meta.env.VITE_API_URL}/crear-usuario`;
 
 const AgregarUsuarios = async (formData) => {
     try {

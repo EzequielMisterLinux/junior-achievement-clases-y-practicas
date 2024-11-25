@@ -4,7 +4,7 @@ const deleteProductByID = async (id) => {
     
     try {
         
-        const response = await axios.delete(`http://localhost:3000/api/borrar-productos/${id}`,{
+        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/borrar-productos/${id}`,{
             withCredentials: true,
           })
 

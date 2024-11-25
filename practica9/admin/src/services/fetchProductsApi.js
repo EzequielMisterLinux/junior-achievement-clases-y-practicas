@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// Configuración de la API
+
 const API_CONFIG = {
-    BASE_URL: "http://localhost:3000/api",  // Removed /api since it's not in your backend route
+    BASE_URL: `${import.meta.env.VITE_API_URL}`,  
     ENDPOINTS: {
-        PRODUCTS: "/obtener-productos"  // Matches the exact route from your backend
+        PRODUCTS: "/obtener-productos"  
     },
     DEFAULT_PAGE: 1,
     DEFAULT_LIMIT: 7
@@ -21,20 +21,20 @@ const fetchProductos = async (
     limit = API_CONFIG.DEFAULT_LIMIT
 ) => {
     try {
-        // Validate and sanitize input
+        
         const validatedPage = Math.max(1, parseInt(page));
         const validatedLimit = Math.max(1, parseInt(limit));
 
-        // Get token from sessionStorage
+        
         const token = sessionStorage.getItem("token");
         if (!token) {
             throw new Error('No se encontró token de autenticación');
         }
 
-        // Build URL with query parameters
+        
         const url = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PRODUCTS}`;
         
-        // Make the request with proper authentication
+        
         const response = await axios.get(url, {
             params: {
                 page: validatedPage,
@@ -44,16 +44,16 @@ const fetchProductos = async (
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`  // Add token to headers
+                'Authorization': `Bearer ${token}`  
             }
         });
 
-        // Validate response data
+        
         if (!response.data) {
             throw new Error('No se recibieron datos del servidor');
         }
 
-        // Extract and return relevant data
+        
         const { productos, totalPages, currentPage } = response.data;
         
         return {
@@ -63,7 +63,7 @@ const fetchProductos = async (
         };
 
     } catch (error) {
-        // Enhanced error handling
+        
         const errorDetails = {
             message: error.response?.data?.msj || error.message,
             status: error.response?.status,
@@ -72,7 +72,7 @@ const fetchProductos = async (
 
         console.error("Error al obtener productos:", errorDetails);
 
-        // If unauthorized, clear session
+        
         if (error.response?.status === 401) {
             sessionStorage.clear();
             window.location.href = '/login';
@@ -83,7 +83,7 @@ const fetchProductos = async (
     }
 };
 
-// Export configuration and fetch function
+
 export const ProductApiConfig = {
     ...API_CONFIG
 };

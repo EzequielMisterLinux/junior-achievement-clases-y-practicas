@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-let urlBase = "http://localhost:3000/api"; 
+let urlBase = `${import.meta.env.VITE_API_URL}`; 
 
 const getUsers = async () => {
     try {

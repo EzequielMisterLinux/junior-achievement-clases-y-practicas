@@ -239,7 +239,7 @@ const handleDeleteProduct = async (productId) => {
                         ${disponibilidadText}
                     </td>
                     <td class="px-6 py-4 hidden md:table-cell">
-                        <img src="http://localhost:3000/uploads/${item.imagen}" 
+                        <img src="${import.meta.env.VITE_API_IMG}/${item.imagen}" 
                              alt="${item.nombre}" 
                              class="h-20 w-20 object-cover rounded">
                     </td>
@@ -329,7 +329,7 @@ const handleDeleteProduct = async (productId) => {
         
         const currentImage = document.getElementById('currentImage');
         if (currentImage) {
-            currentImage.src = `http://localhost:3000/uploads/${item.imagen}`;
+            currentImage.src = `${import.meta.env.VITE_API_IMG}/${item.imagen}`;
         }
     
         const modal = new Modal(document.getElementById('updateModal'));
@@ -343,7 +343,7 @@ const handleDeleteProduct = async (productId) => {
         document.getElementById('precioView').textContent = `$${item.precio}`;
         document.getElementById('disponibilidadView').textContent = 
             item.disponibilidad ? "Sí está disponible" : "No está disponible";
-        document.getElementById('imagenView').src = `http://localhost:3000/uploads/${item.imagen}`;
+        document.getElementById('imagenView').src = `${import.meta.env.VITE_API_IMG}/${item.imagen}`;
     
         const modal = new Modal(document.getElementById('viewModal'));
         modal.show();
@@ -390,5 +390,8 @@ const handleDeleteProduct = async (productId) => {
         renderProductos();
     };
     
-    export default initializeProductos;
+    export {
+        initializeProductos,
+        renderProductos
+    }
     

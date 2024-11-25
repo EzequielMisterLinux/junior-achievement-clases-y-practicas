@@ -17,7 +17,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', 
+  origin: process.env.FRONTEND_URL, 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -36,8 +36,8 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 const puerto = process.env.PORT || 3000;
 app.listen(puerto, () => {
-  console.log(`Servidor corriendo en http://localhost:${puerto}`);
-  console.log(`Documentación disponible en http://localhost:${puerto}/api-docs`);
+  console.log(`Servidor corriendo en ${process.env.BACKENDURL}:${puerto}`);
+  console.log(`Documentación disponible en ${process.env.BACKENDURL}:${puerto}/api-docs`);
 });
 
 app.use((err, req, res, next) => {
