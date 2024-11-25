@@ -1,18 +1,22 @@
-import axios from "axios";
+let urlBase = "http://localhost:3000/api/crear-producto";
 
-let urlBase = "http://localhost:3000/api/crear-producto"
-
-const AgregarProductos = async (data) => {
+const AgregarProductos = async (formData) => {
     try {
+        const response = await fetch(urlBase, {
+            method: 'POST',
+            body: formData, 
+            credentials: 'include', 
+        });
 
-        const response = await axios.post(urlBase, data)
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
 
-        return await response.data
-        
+        return response;
     } catch (error) {
-        console.error(error);
-        
+        console.error('Error en la petición:', error);
+        throw error;
     }
-}
+};
 
-export default AgregarProductos
+export default AgregarProductos;

@@ -1,23 +1,47 @@
 import axios from "axios";
 
+const urlBase = "http://localhost:3000/api/actualizar-productos";
 
-let urlBase = "http://localhost:3000/api/actualizar-productos"
-
-
-const updateProductById = async (id, newInfoProduct) => {
-    
+const updateProductById = async (id, formData) => {
     try {
-        
-        const respuestaDeLaActualizacion = await axios.put(`${urlBase}/${id}`, newInfoProduct)
-        
 
-        return await respuestaDeLaActualizacion.data
+        if (formData.has('disponibilidad')) {
+            const disponibilidad = formData.get('disponibilidad');
+            formData.set('disponibilidad', String(disponibilidad));
+        }
 
+
+        if (formData.has('imagen') && !formData.get('imagen').name) {
+            formData.delete('imagen');
+        }
+
+        const response = await axios.put(`${urlBase}/${id}`, formData, {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+
+            timeout: 30000,
+            maxContentLength: 10000000 
+        });
+
+        if (!response.data) {
+            throw new Error('No se recibió respuesta del servidor');
+        }
+
+        return response.data;
     } catch (error) {
-        console.error("hubo un problema al actualizar el producto, ", error);
-        
+        if (error.response) {
+
+            throw new Error(error.response.data.msg || 'Error en la respuesta del servidor');
+        } else if (error.request) {
+
+            throw new Error('No se recibió respuesta del servidor');
+        } else {
+
+            throw new Error('Error al configurar la petición');
+        }
     }
+};
 
-}
-
-export default updateProductById
+export default updateProductById;

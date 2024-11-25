@@ -8,14 +8,24 @@ import CreateUser from "../controllers/register.user.js";
 import LoginUser from "../controllers/login.user.js";
 import verifyToken from "../controllers/verifyToken-controller.js";
 import Protected from "../middleware/protected.js";
+import logoutUser from "../controllers/logout.js";
+import getAllUsers from "../controllers/getAllUsers.controller.js";
 
 const rutasDeLosProductos = express.Router();
 
-rutasDeLosProductos.post("/crear-usuario", CreateUser)
+
+rutasDeLosProductos.post("/crear-usuario", Protected, CreateUser)
+
+rutasDeLosProductos.get("/get-users", Protected ,getAllUsers)
+
 
 rutasDeLosProductos.post("/login", LoginUser)
 
 rutasDeLosProductos.get("/verify-token", verifyToken)
+
+
+
+rutasDeLosProductos.post("/logout", logoutUser)
 
 /**
  * @swagger
@@ -44,7 +54,7 @@ rutasDeLosProductos.get("/verify-token", verifyToken)
  *       400:
  *         description: Todos los campos son requeridos
  */
-rutasDeLosProductos.post("/crear-producto", AgregarProducto);
+rutasDeLosProductos.post("/crear-producto", Protected, AgregarProducto);
 
 /**
  * @swagger
@@ -56,7 +66,7 @@ rutasDeLosProductos.post("/crear-producto", AgregarProducto);
  *       200:
  *         description: Lista de productos obtenida exitosamente
  */
-rutasDeLosProductos.get("/obtener-productos",Protected ,ObteniendoTodosLosProductos);
+rutasDeLosProductos.get("/obtener-productos", Protected, ObteniendoTodosLosProductos);
 
 /**
  * @swagger
@@ -79,7 +89,7 @@ rutasDeLosProductos.get("/obtener-productos",Protected ,ObteniendoTodosLosProduc
  *       500:
  *         description: Error al borrar el producto
  */
-rutasDeLosProductos.delete("/borrar-productos/:id", BorrandoProducto);
+rutasDeLosProductos.delete("/borrar-productos/:id", Protected, BorrandoProducto);
 
 /**
  * @swagger
@@ -115,6 +125,6 @@ rutasDeLosProductos.delete("/borrar-productos/:id", BorrandoProducto);
  *       500:
  *         description: Error al actualizar el producto
  */
-rutasDeLosProductos.put("/actualizar-productos/:id", ActualizarProducto);
+rutasDeLosProductos.put("/actualizar-productos/:id", Protected ,ActualizarProducto);
 
 export default rutasDeLosProductos;

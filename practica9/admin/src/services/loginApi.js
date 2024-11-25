@@ -9,6 +9,7 @@ const authService = {
         withCredentials: true,
       });
       sessionStorage.setItem("userData", JSON.stringify(response.data)); 
+      sessionStorage.setItem("token", "true")
       return response.data;
     } catch (error) {
       throw error.response?.data || { msg: "Error en el intento de login" };
@@ -20,7 +21,8 @@ const authService = {
       const response = await axios.get(`${API_URL}/verify-token`, {
         withCredentials: true,
       });
-      sessionStorage.setItem("userData", JSON.stringify(response.data)); 
+      sessionStorage.setItem("userData", JSON.stringify(response.data));
+      sessionStorage.setItem("token", "true") 
       return response.data;
     } catch (error) {
       throw error.response?.data || { msg: "Error al verificar el token" };
@@ -33,6 +35,7 @@ const authService = {
         withCredentials: true,
       });
       sessionStorage.removeItem("userData");
+      sessionStorage.removeItem()
     } catch (error) {
       console.error("Logout error:", error);
     }

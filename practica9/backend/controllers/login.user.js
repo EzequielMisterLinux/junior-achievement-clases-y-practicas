@@ -32,8 +32,7 @@ const LoginUser = async (req, res) => {
     });
 
     res.json({
-      
-      
+        id: userLogged._id,
         nombre: userLogged.nombre,
         apellido: userLogged.apellido,
         email: userLogged.email,

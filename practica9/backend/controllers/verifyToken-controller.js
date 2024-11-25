@@ -17,6 +17,7 @@ const verifyToken = async (req, res) => {
     }
 
     res.json({
+      id: user._id,
       nombre: user.nombre,
       apellido: user.apellido,
       email: user.email,

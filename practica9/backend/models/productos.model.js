@@ -16,6 +16,10 @@ const productosSchema = new mongoose.Schema({
     disponibilidad:{
         type:Boolean,
         require:true
+    },
+    imagen: {
+        type: String,
+        required : true
     }
 })
 

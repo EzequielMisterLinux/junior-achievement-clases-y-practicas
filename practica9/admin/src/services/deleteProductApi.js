@@ -4,7 +4,9 @@ const deleteProductByID = async (id) => {
     
     try {
         
-        const response = await axios.delete(`http://localhost:3000/api/borrar-productos/${id}`)
+        const response = await axios.delete(`http://localhost:3000/api/borrar-productos/${id}`,{
+            withCredentials: true,
+          })
 
         return await response.data
 
